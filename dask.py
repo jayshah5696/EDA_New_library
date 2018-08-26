@@ -55,3 +55,22 @@ def process(data):
 
 # Normal process
 results = [processs(x) for x in inputs]
+
+
+# Instead of this now wrap this function in dask.delayed and let the appropriate dask scheduler parallelize and load balance the work.
+
+from dask import compute, delayed
+values = [delayed(process)(x) for x in inputs]
+# This task is same for local and clusters machine computation
+
+# 1 Now for multiple threads
+import dask.threaded
+results = compute(*values, scheduler='threads')
+
+# 2 for cluster
+from dask.distributed import Client
+client = Client("cluster-address:8786")
+results = compute(*values, scheduler='distributed'
+
+
+# Now every function can be wrapped under delayed computation
