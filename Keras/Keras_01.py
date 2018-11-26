@@ -39,3 +39,7 @@ test_labels = to_categorical(test_labels)
 
 # Fitting the network
 networks.fit(train_images, train_labels, epochs=5, batch_size=128)
+
+# Evaluating model on Test Images
+test_loss, test_acc = networks.evaluate(test_images,test_labels)
+print('Test Loss',test_loss, ' Test Acc', test_acc)
